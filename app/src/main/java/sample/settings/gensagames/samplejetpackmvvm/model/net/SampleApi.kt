@@ -1,6 +1,7 @@
 package sample.settings.gensagames.samplejetpackmvvm.model.net
 
 import android.util.Log
+import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -8,7 +9,6 @@ import kotlin.random.Random
  * Stub implementation of API Service, or Repository files.
  */
 class SampleApi @Inject constructor() {
-    private val TAG = SampleApi::class.simpleName
 
     fun getSampleStatus(value : Any) : Boolean {
 
