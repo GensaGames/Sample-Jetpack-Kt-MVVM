@@ -6,11 +6,12 @@ import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi2
 import javax.inject.Singleton
 
 @Module
-class MainApiModule {
+open class MainApiModule {
 
     @Provides
     @Singleton
-    fun provideSampleApi2(): SampleApi2 {
+    open fun provideSampleApi2(): SampleApi2 {
         return SampleApi2("SampleApi2-Tag")
     }
+
 }

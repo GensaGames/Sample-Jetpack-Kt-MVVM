@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [MainApiModule::class])
-interface ViewModelComponent {
+interface BaseComponent {
 
     /**
      * Injects required dependencies into the specified BaseViewModel.
@@ -17,7 +17,7 @@ interface ViewModelComponent {
 
     @Component.Builder
     interface Builder {
-        fun build(): ViewModelComponent
+        fun build(): BaseComponent
 
         fun module(module: MainApiModule): Builder
     }
