@@ -12,14 +12,14 @@ class SampleApi @Inject constructor() {
 
     fun getSampleStatus(value : Any) : Boolean {
 
-        fun innerValid(v : String) : Boolean {
+        fun innerValid() : Boolean {
             val result = Random(System.currentTimeMillis()).nextBoolean()
             Log.d(TAG, String.format("Returning Sample API Response: %s", result))
             return result
         }
 
         return when (value) {
-            is String -> innerValid(value)
+            is String -> innerValid()
             else -> false
         }
     }

@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
-import sample.settings.gensagames.samplejetpackmvvm.view.inject.DaggerMainComponent
+import sample.settings.gensagames.samplejetpackmvvm.view.inject.DaggerActivityComponent
 import javax.inject.Inject
 
 
@@ -15,7 +15,7 @@ class MainApplication : Application(), HasActivityInjector{
 
     override fun onCreate() {
         super.onCreate()
-        DaggerMainComponent.create().inject(this);
+        DaggerActivityComponent.create().inject(this);
     }
 
 

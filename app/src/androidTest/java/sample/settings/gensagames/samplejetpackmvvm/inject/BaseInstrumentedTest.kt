@@ -16,8 +16,6 @@ abstract class BaseInstrumentedTest {
 
     @Before
     fun setUp() {
-        Log.d("TAG","LOL11");
-        System.out.println("LOL11")
         injector.inject(this as MainViewModelTest)
     }
 }
