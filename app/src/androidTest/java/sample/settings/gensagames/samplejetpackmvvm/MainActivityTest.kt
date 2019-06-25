@@ -1,27 +1,25 @@
 package sample.settings.gensagames.samplejetpackmvvm
 
-import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import org.hamcrest.Matchers.not
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import sample.settings.gensagames.samplejetpackmvvm.inject.BaseInstrumentedTest
-import sample.settings.gensagames.samplejetpackmvvm.utils.assertNotEmptyAction
+import sample.settings.gensagames.samplejetpackmvvm.utils.atPosition
 import sample.settings.gensagames.samplejetpackmvvm.utils.isFeaturedViewHolder
 import sample.settings.gensagames.samplejetpackmvvm.utils.waitFor
 import sample.settings.gensagames.samplejetpackmvvm.view.MainActivity
-import sample.settings.gensagames.samplejetpackmvvm.view.adapter.MainGridInfoAdapter
 import java.util.concurrent.TimeUnit
 
 
@@ -49,6 +47,11 @@ class MainActivityTest : BaseInstrumentedTest() {
             "sample.settings.gensagames.samplejetpackmvvm",
             appContext.packageName
         )
+
+        Assert.assertEquals(
+            activityScenarioRule
+                .scenario.state, Lifecycle.State.RESUMED
+        )
     }
 
     @Test
@@ -74,11 +77,6 @@ class MainActivityTest : BaseInstrumentedTest() {
 
     @Test
     fun testMinimumItems() {
-        Assert.assertEquals(
-            activityScenarioRule
-                .scenario.state, Lifecycle.State.RESUMED
-        )
-
         onView(isRoot()).perform(waitFor(ITEMS_TIME_TO))
         onView(withId(R.id.recyclerView)).check { v, _ ->
             v as RecyclerView
@@ -93,7 +91,7 @@ class MainActivityTest : BaseInstrumentedTest() {
     fun testFeaturedViewHolder() {
         onView(isRoot()).perform(waitFor(ITEMS_TIME_TO))
         onView(withId(R.id.recyclerView))
-            .perform(RecyclerViewActions.scrollToHolder(isFeaturedViewHolder()))
+            .perform(scrollToHolder(isFeaturedViewHolder()))
     }
 
     @Test
@@ -103,11 +101,19 @@ class MainActivityTest : BaseInstrumentedTest() {
         for (i in 1..ITEMS_MIN_SIZE) {
             onView(withId(R.id.recyclerView))
                 .perform(
-                    RecyclerViewActions.actionOnItemAtPosition
-                    <RecyclerView.ViewHolder>(i, assertNotEmptyAction())
+                    actionOnItemAtPosition
+                    <RecyclerView.ViewHolder>(i, click())
                 )
-
-
+            onView(withId(R.id.recyclerView))
+                .perform(scrollToPosition<RecyclerView.ViewHolder>(i))
+                .check(
+                    matches(
+                        atPosition(
+                            i,
+                            hasDescendant(not(withText("")))
+                        )
+                    )
+                )
         }
     }
 }
