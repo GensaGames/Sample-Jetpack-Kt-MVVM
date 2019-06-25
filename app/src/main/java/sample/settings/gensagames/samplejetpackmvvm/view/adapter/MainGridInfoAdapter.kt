@@ -10,6 +10,7 @@ import sample.settings.gensagames.samplejetpackmvvm.databinding.InfoAdapterItemB
 import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
 import sample.settings.gensagames.samplejetpackmvvm.view.viewmodel.AdapterViewModel
+import kotlin.random.Random
 
 class MainGridInfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -45,6 +46,11 @@ class MainGridInfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(info:InfoObject) {
             binding.viewModel = viewModel
             viewModel.bind(info)
+        }
+
+        fun isFeatured(): Boolean {
+            return Random(System.currentTimeMillis())
+                .nextBoolean()
         }
 
     }

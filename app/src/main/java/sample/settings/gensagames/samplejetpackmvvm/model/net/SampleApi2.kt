@@ -20,7 +20,7 @@ class SampleApi2 @Inject constructor(
         val list = mutableListOf<InfoObject>()
 
         for (i in 1..Random(System.currentTimeMillis())
-            .nextInt(10, 25)) {
+            .nextInt(15, 25)) {
 
             list.add(InfoObject(
                 LoremIpsum.getInstance().name,

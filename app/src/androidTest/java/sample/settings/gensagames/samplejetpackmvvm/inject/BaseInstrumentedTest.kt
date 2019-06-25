@@ -1,10 +1,9 @@
 package sample.settings.gensagames.samplejetpackmvvm.inject
 
-import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Before
 import org.junit.runner.RunWith
-import sample.settings.gensagames.samplejetpackmvvm.MainViewModelTest
+import sample.settings.gensagames.samplejetpackmvvm.MainActivityTest
 
 
 @RunWith(AndroidJUnit4::class)
@@ -16,6 +15,8 @@ abstract class BaseInstrumentedTest {
 
     @Before
     fun setUp() {
-        injector.inject(this as MainViewModelTest)
+        when (this) {
+            is MainActivityTest -> injector.inject(this)
+        }
     }
 }
