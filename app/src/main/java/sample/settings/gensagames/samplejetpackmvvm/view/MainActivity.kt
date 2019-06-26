@@ -22,6 +22,9 @@ import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        const val GRID_SIZE = 2
+    }
 
     @Inject
     lateinit var sampleContextHelper: SampleContextHelper
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         val infoAdapter = MainGridInfoAdapter()
         binding.recyclerView.layoutManager =
-            GridLayoutManager(this, 2)
+            GridLayoutManager(this, GRID_SIZE)
         binding.recyclerView.adapter = infoAdapter
 
 
@@ -63,13 +66,6 @@ class MainActivity : AppCompatActivity() {
                 binding.textMainHeader1.text = t.header
                 binding.textMainHeader2.text = t.message
             })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume.")
-        sampleContextHelper.logSampleInfo(this)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -16,11 +16,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import sample.settings.gensagames.samplejetpackmvvm.inject.BaseInstrumentedTest
+import sample.settings.gensagames.samplejetpackmvvm.model.SampleContextHelper
 import sample.settings.gensagames.samplejetpackmvvm.utils.atPosition
 import sample.settings.gensagames.samplejetpackmvvm.utils.isFeaturedViewHolder
 import sample.settings.gensagames.samplejetpackmvvm.utils.waitFor
 import sample.settings.gensagames.samplejetpackmvvm.view.MainActivity
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
 @RunWith(AndroidJUnit4::class)
@@ -31,6 +33,9 @@ class MainActivityTest : BaseInstrumentedTest() {
             .SECONDS.toMillis(1)
         private const val ITEMS_MIN_SIZE = 15
     }
+
+    @Inject
+    lateinit var sampleContextHelper: SampleContextHelper
 
     /**
      * Use [ActivityScenarioRule] to create and launch the activity under test.
@@ -56,11 +61,6 @@ class MainActivityTest : BaseInstrumentedTest() {
 
     @Test
     fun testActiveLoading() {
-        Assert.assertEquals(
-            activityScenarioRule
-                .scenario.state, Lifecycle.State.RESUMED
-        )
-
         onView(withId(R.id.progress)).check(
             matches(
                 withEffectiveVisibility(Visibility.VISIBLE)
