@@ -34,17 +34,17 @@ class MainActivityTest : BaseInstrumentedTest() {
         private const val ITEMS_MIN_SIZE = 15
     }
 
-    @Inject
-    lateinit var sampleContextHelper: SampleContextHelper
-
     /**
      * Use [ActivityScenarioRule] to create and launch the activity under test.
      */
     @get:Rule
     var activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
+    @Inject
+    lateinit var sampleContextHelper: SampleContextHelper
+
     @Test
-    fun testUseAppContext() {
+    fun testStartReady() {
         val appContext = InstrumentationRegistry
             .getInstrumentation().targetContext
 
@@ -57,6 +57,14 @@ class MainActivityTest : BaseInstrumentedTest() {
             activityScenarioRule
                 .scenario.state, Lifecycle.State.RESUMED
         )
+    }
+
+    @Test
+    fun testInjectedObjects() {
+        val appContext = InstrumentationRegistry
+            .getInstrumentation().targetContext
+
+        sampleContextHelper.logSampleInfo(appContext)
     }
 
     @Test
