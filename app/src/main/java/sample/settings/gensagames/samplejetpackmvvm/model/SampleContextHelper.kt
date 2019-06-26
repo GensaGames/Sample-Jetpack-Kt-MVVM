@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Just simple helper class, injected in Context files,
  * for tests purpose to mock changes in dagger in some tests.
  */
-class SampleContextHelper @Inject constructor() {
+open class SampleContextHelper @Inject constructor() {
 
     fun logSampleInfo(context : Context) {
         Log.d(TAG, String.format("logSampleInfo. " +

@@ -3,11 +3,9 @@ package sample.settings.gensagames.samplejetpackmvvm.inject
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
+import org.mockito.Mockito
 import sample.settings.gensagames.samplejetpackmvvm.model.SampleContextHelper
-import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi
-import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi2
 import sample.settings.gensagames.samplejetpackmvvm.view.MainActivity
-import sample.settings.gensagames.samplejetpackmvvm.view.inject.MainApiModule
 import javax.inject.Singleton
 
 
@@ -21,9 +19,10 @@ abstract class TestActivityModule {
     companion object {
 
         @Provides
+        @JvmStatic
         @Singleton
-        fun provideSampleContextHelper(): SampleContextHelper? {
-            return null
+        fun provideSampleContextHelper(): SampleContextHelper {
+            return Mockito.mock(SampleContextHelper::class.java)
         }
     }
 }
