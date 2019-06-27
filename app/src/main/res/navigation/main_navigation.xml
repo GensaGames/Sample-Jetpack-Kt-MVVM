@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/main_navigation"
+            app:startDestination="@id/main_fragment">
+
+    <fragment
+            android:id="@+id/main_fragment"
+            android:name="sample.settings.gensagames.samplejetpackmvvm.view.MainFragment"
+            android:label="Main Fragment"
+            app:defaultNavHost="true"
+            tools:layout="@layout/main_fragment">
+        <action
+                android:id="@+id/navigate_to_detail_activity"
+                app:destination="@id/detail_activity"/>
+    </fragment>
+
+    <activity
+            android:id="@+id/detail_activity"
+            android:name="sample.settings.gensagames.samplejetpackmvvm.view.DetailActivity"
+            android:label="Detail Activity"
+            tools:layout="@layout/detail_activity">
+    </activity>
+
+</navigation>

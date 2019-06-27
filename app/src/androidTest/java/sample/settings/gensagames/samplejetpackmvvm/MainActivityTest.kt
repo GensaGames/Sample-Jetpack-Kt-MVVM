@@ -3,6 +3,7 @@ package sample.settings.gensagames.samplejetpackmvvm
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.*
@@ -112,6 +113,9 @@ class MainActivityTest : BaseInstrumentedTest() {
                     actionOnItemAtPosition
                     <RecyclerView.ViewHolder>(i, click())
                 )
+
+            onView(isRoot()).perform(ViewActions.pressBack());
+
             onView(withId(R.id.recyclerView))
                 .perform(scrollToPosition<RecyclerView.ViewHolder>(i))
                 .check(
