@@ -35,9 +35,6 @@ class MainActivityTest : BaseInstrumentedTest() {
         private const val ITEMS_MIN_SIZE = 15
     }
 
-    /**
-     * Use [ActivityScenarioRule] to create and launch the activity under test.
-     */
     @get:Rule
     var activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 

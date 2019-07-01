@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.main_activity.*
 import sample.settings.gensagames.samplejetpackmvvm.R
@@ -23,7 +24,10 @@ class MainActivity : BaseActivity() {
         fab.setOnClickListener {
             Navigation
                 .findNavController(this@MainActivity, R.id.main_content)
-                .navigate(R.id.navigate_to_detail_activity)
+                .navigate(R.id.navigate_to_detail_activity, null,
+                    NavOptions.Builder()
+                        .setLaunchSingleTop(true)
+                        .build())
         }
     }
 
