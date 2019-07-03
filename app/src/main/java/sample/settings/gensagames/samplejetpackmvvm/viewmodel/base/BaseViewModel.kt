@@ -1,10 +1,10 @@
-package sample.settings.gensagames.samplejetpackmvvm.view.viewmodel.base
+package sample.settings.gensagames.samplejetpackmvvm.viewmodel.base
 
 import androidx.lifecycle.ViewModel
 import sample.settings.gensagames.samplejetpackmvvm.view.inject.DaggerViewModelComponent
 import sample.settings.gensagames.samplejetpackmvvm.view.inject.MainApiModule
 import sample.settings.gensagames.samplejetpackmvvm.view.inject.ViewModelComponent
-import sample.settings.gensagames.samplejetpackmvvm.view.viewmodel.MainViewModel
+import sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel
 
 abstract class BaseViewModel : ViewModel() {
 

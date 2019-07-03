@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import sample.settings.gensagames.samplejetpackmvvm.R
-import sample.settings.gensagames.samplejetpackmvvm.view.viewmodel.DetailViewModel
+import sample.settings.gensagames.samplejetpackmvvm.viewmodel.DetailViewModel
 
 class DetailFragment : Fragment() {
 

@@ -2,28 +2,31 @@ package sample.settings.gensagames.samplejetpackmvvm.view.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.databinding.InfoAdapterItemBinding
 import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
-import sample.settings.gensagames.samplejetpackmvvm.view.viewmodel.AdapterViewModel
+import sample.settings.gensagames.samplejetpackmvvm.viewmodel.AdapterViewModel
 import kotlin.random.Random
 
-class MainGridInfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainGridInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var infoObjects : List<InfoObject>
+    private lateinit var infoObjects: List<InfoObject>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoViewHolder {
         val binding: InfoAdapterItemBinding = DataBindingUtil.inflate(LayoutInflater
-            .from(parent.context), R.layout.info_adapter_item, parent, false)
+                .from(parent.context), R.layout.info_adapter_item, parent, false)
         return InfoViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return if(::infoObjects.isInitialized) infoObjects.size else 0
+        return if (::infoObjects.isInitialized) infoObjects.size else 0
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
@@ -39,18 +42,19 @@ class MainGridInfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     class InfoViewHolder(private val binding: InfoAdapterItemBinding)
-        : RecyclerView.ViewHolder(binding.root){
+        : RecyclerView.ViewHolder(binding.root) {
 
         private val viewModel = AdapterViewModel()
+        private lateinit var infoObject: InfoObject
 
-        fun bind(info:InfoObject) {
+        fun bind(info: InfoObject) {
+            infoObject = info
             binding.viewModel = viewModel
             viewModel.bind(info)
         }
 
         fun isFeatured(): Boolean {
-            return Random(System.currentTimeMillis())
-                .nextBoolean()
+            return infoObject.isFeatured
         }
 
     }

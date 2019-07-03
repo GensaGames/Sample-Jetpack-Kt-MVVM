@@ -1,7 +1,7 @@
 package sample.settings.gensagames.samplejetpackmvvm.view.inject
 
 import dagger.Component
-import sample.settings.gensagames.samplejetpackmvvm.view.viewmodel.MainViewModel
+import sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel
 import javax.inject.Singleton
 
 

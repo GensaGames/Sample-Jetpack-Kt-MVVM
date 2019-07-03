@@ -9,14 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.databinding.MainFragmentBinding
 import sample.settings.gensagames.samplejetpackmvvm.model.SampleContextHelper
 import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.view.adapter.MainGridInfoAdapter
-import sample.settings.gensagames.samplejetpackmvvm.view.viewmodel.MainViewModel
+import sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel
 import javax.inject.Inject
 
 class MainFragment : Fragment() {

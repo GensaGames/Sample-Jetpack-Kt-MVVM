@@ -1,4 +1,4 @@
-package sample.settings.gensagames.samplejetpackmvvm.view.viewmodel
+package sample.settings.gensagames.samplejetpackmvvm.viewmodel
 
 import android.util.Log
 import android.view.View
@@ -9,8 +9,8 @@ import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi
 import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi2
 import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
-import sample.settings.gensagames.samplejetpackmvvm.view.viewmodel.base.BaseViewModel
-import sample.settings.gensagames.samplejetpackmvvm.view.viewmodel.base.OnLoadingInfo
+import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.BaseViewModel
+import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.OnLoadingInfo
 import javax.inject.Inject
 
 class MainViewModel : BaseViewModel(), OnLoadingInfo {
@@ -49,6 +49,7 @@ class MainViewModel : BaseViewModel(), OnLoadingInfo {
         Log.d(TAG, String.format("onLoaded. Status Sample: %s",
             sampleApi.getSampleStatus("Test")))
 
+        Log.d(TAG, "onLoaded. Objects: $objects")
         loadingStatus.postValue(View.GONE)
         loadingInfoItems.postValue(objects)
     }
