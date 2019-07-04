@@ -47,7 +47,7 @@ fun setKenburnsImages(view: KenBurnsView, url : MutableLiveData<String>?) {
         }
 
         override fun onLoadFailed(errorDrawable: Drawable?) {
-            Log.d(TAG, "onLoadFailed. Loading random!")
+            Log.e(TAG, "onLoadFailed. Loading random!")
             super.onLoadFailed(errorDrawable)
 
             /**

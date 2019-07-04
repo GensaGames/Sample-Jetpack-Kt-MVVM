@@ -52,6 +52,6 @@ class SampleApi2 @Inject constructor(
      * See Picsum.com for more details.
      */
     private fun getRandomImageUrl(idx : Int): String {
-        return "https://picsum.photos/id/${200+idx}/800/600"
+        return "https://picsum.photos/id/${305+idx}/300/200"
     }
 }

@@ -28,7 +28,7 @@ class KenBurnsView @JvmOverloads constructor(
     private val random = Random()
     private val mSwapMs = 10000
     private val mFadeInOutMs = 1000
-    private val mFadeInStartMs = 1000
+    private val mFadeInStartMs = 1500
 
     private val maxScaleFactor = 1.5f
     private val minScaleFactor = 1.2f
@@ -47,7 +47,6 @@ class KenBurnsView @JvmOverloads constructor(
     }
 
     private fun swapImage() {
-        Log.d(TAG, "swapImage active=$mActiveImageIndex")
         if (mActiveImageIndex == -1) {
             mActiveImageIndex = 1
             animate(mImageViews!![mActiveImageIndex])
@@ -57,7 +56,6 @@ class KenBurnsView @JvmOverloads constructor(
 
         val inactiveIndex = mActiveImageIndex
         mActiveImageIndex = (1 + mActiveImageIndex) % mImageViews!!.size
-        Log.d(TAG, "new active=$mActiveImageIndex")
 
         val activeImageView = mImageViews!![mActiveImageIndex]
         activeImageView.alpha = 0.0f
@@ -97,7 +95,6 @@ class KenBurnsView @JvmOverloads constructor(
             .translationY(toTranslationY)
             .scaleX(toScale).scaleY(toScale).setDuration(duration)
         propertyAnimator.start()
-        Log.d(TAG, "starting Ken Burns animation $propertyAnimator")
     }
 
     private fun pickScale(): Float {
