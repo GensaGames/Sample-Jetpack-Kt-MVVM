@@ -1,6 +1,6 @@
 package sample.settings.gensagames.samplejetpackmvvm.viewmodel.base
 
-import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 
 interface OnLoadingInfo {
 

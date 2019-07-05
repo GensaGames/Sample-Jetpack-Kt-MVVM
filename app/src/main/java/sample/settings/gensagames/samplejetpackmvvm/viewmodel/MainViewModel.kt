@@ -4,8 +4,8 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import sample.settings.gensagames.samplejetpackmvvm.model.`object`.HeaderIntroObject
-import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi
 import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi2
 import sample.settings.gensagames.samplejetpackmvvm.utils.TAG

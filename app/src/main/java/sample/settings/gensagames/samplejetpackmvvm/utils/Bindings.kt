@@ -20,7 +20,7 @@ import com.bumptech.glide.request.transition.Transition
 fun setMutableVisibility(view: View, visibility: MutableLiveData<Int>?) {
     val parentActivity: AppCompatActivity? = view.getParentActivity()
 
-    if(parentActivity != null && visibility != null) {
+    if (parentActivity != null && visibility != null) {
         visibility.observe(parentActivity, Observer { value ->
             view.visibility = value?:View.VISIBLE})
     }
@@ -29,32 +29,38 @@ fun setMutableVisibility(view: View, visibility: MutableLiveData<Int>?) {
 @BindingAdapter("mutableText")
 fun setMutableText(view: TextView, text: MutableLiveData<String>?) {
     val parentActivity:AppCompatActivity? = view.getParentActivity()
-    if(parentActivity != null && text != null) {
+
+    if (parentActivity != null && text != null) {
         text.observe(parentActivity, Observer { value -> view.text = value?:""})
     }
 }
 
+@BindingAdapter("staticText")
+fun setStaticText(view: TextView, text: String?) {
+    val parentActivity:AppCompatActivity? = view.getParentActivity()
+    if (parentActivity != null) {
+        view.text = text ?: ""
+    }
+}
+
 @BindingAdapter("kenburnsImages")
-fun setKenburnsImages(view: KenBurnsView, url : MutableLiveData<String>?) {
+fun setKenburnsImages(view: KenBurnsView, url : String?) {
 
     val target = object : CustomTarget<Bitmap>(){
         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
             Log.d(TAG, "onResourceReady.")
             view.setResourceIds(resource, resource)
         }
-
         override fun onLoadCleared(placeholder: Drawable?) {
         }
 
         override fun onLoadFailed(errorDrawable: Drawable?) {
             Log.e(TAG, "onLoadFailed. Loading random!")
             super.onLoadFailed(errorDrawable)
-
             /**
              * Just Stub to load random Image.
              */
-            val newUrl = MutableLiveData<String>()
-            newUrl.value = "https://picsum.photos/800"
+            val newUrl = "https://picsum.photos/800"
             setKenburnsImages(view, newUrl)
         }
     }
@@ -62,6 +68,6 @@ fun setKenburnsImages(view: KenBurnsView, url : MutableLiveData<String>?) {
     Glide.with(view.context)
         .asBitmap()
         .diskCacheStrategy(DiskCacheStrategy.NONE)
-        .load(url!!.value)
+        .load(url!!)
         .into(target)
 }

@@ -21,9 +21,9 @@
             android:name="sample.settings.gensagames.samplejetpackmvvm.view.DetailActivity"
             android:label="Detail Activity"
             tools:layout="@layout/detail_activity">
-        <!--<argument-->
-                <!--android:name="infoObject"-->
-                <!--app:argType="sample.settings.gensagames.samplejetpackmvvm.model.InfoObject" />-->
+
+        <argument android:name="infoObject"
+                  app:argType="sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject"/>
     </activity>
 
 </navigation>

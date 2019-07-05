@@ -13,7 +13,7 @@ import dagger.android.support.AndroidSupportInjection
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.databinding.MainFragmentBinding
 import sample.settings.gensagames.samplejetpackmvvm.model.SampleContextHelper
-import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.view.adapter.MainGridInfoAdapter
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel
 import javax.inject.Inject

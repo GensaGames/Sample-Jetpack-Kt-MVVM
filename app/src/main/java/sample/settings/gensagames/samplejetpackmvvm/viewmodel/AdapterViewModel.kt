@@ -1,20 +1,31 @@
 package sample.settings.gensagames.samplejetpackmvvm.viewmodel
 
+import android.util.Log
+import androidx.core.os.bundleOf
 import androidx.lifecycle.MutableLiveData
-import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
+import sample.settings.gensagames.samplejetpackmvvm.R
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
+import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.BaseViewModel
 
 class AdapterViewModel : BaseViewModel() {
 
-    val header = MutableLiveData<String>()
-    val contact = MutableLiveData<String>()
-    val summary = MutableLiveData<String>()
-    val imageUrl = MutableLiveData<String>()
+    interface OnNavigate {
+        fun onNavigateToInfo()
+    }
 
-    fun bind(info: InfoObject){
-        header.value = info.name
-        contact.value = info.contact
-        summary.value = info.summary
-        imageUrl.value = info.imageUrl
+    val infoObject : MutableLiveData<InfoObject> = MutableLiveData()
+    lateinit var onNavigate : OnNavigate
+
+    fun bind(info: InfoObject, onNav : OnNavigate){
+        infoObject.value = info
+        onNavigate = onNav
+    }
+
+    fun navigateToInfo() {
+        Log.d(TAG, "navigateToInfo: $this")
+        onNavigate.onNavigateToInfo()
     }
 }

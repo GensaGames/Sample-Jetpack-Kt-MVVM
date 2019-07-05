@@ -1,4 +1,4 @@
-package sample.settings.gensagames.samplejetpackmvvm.model.`object`
+package sample.settings.gensagames.samplejetpackmvvm.model.dto
 
 import android.os.Parcel
 import android.os.Parcelable

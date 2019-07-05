@@ -1,12 +1,10 @@
 package sample.settings.gensagames.samplejetpackmvvm.model.net
 
-import android.util.Log
 import com.thedeanda.lorem.LoremIpsum
-import sample.settings.gensagames.samplejetpackmvvm.model.`object`.HeaderIntroObject
-import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import javax.inject.Inject
 import kotlin.random.Random
-import com.thedeanda.lorem.Lorem
 
 
 /**

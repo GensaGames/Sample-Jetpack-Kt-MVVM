@@ -2,26 +2,28 @@ package sample.settings.gensagames.samplejetpackmvvm.view.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.databinding.InfoAdapterItemBinding
-import sample.settings.gensagames.samplejetpackmvvm.model.`object`.InfoObject
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
+import sample.settings.gensagames.samplejetpackmvvm.view.DetailActivity
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.AdapterViewModel
-import kotlin.random.Random
 
 class MainGridInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var infoObjects: List<InfoObject>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoViewHolder {
-        val binding: InfoAdapterItemBinding = DataBindingUtil.inflate(LayoutInflater
-                .from(parent.context), R.layout.info_adapter_item, parent, false)
+        val binding: InfoAdapterItemBinding = DataBindingUtil.inflate(
+            LayoutInflater
+                .from(parent.context), R.layout.info_adapter_item, parent, false
+        )
         return InfoViewHolder(binding)
     }
 
@@ -42,20 +44,31 @@ class MainGridInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     class InfoViewHolder(private val binding: InfoAdapterItemBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+        : RecyclerView.ViewHolder(binding.root), AdapterViewModel.OnNavigate {
 
         private val viewModel = AdapterViewModel()
-        private lateinit var infoObject: InfoObject
 
         fun bind(info: InfoObject) {
-            infoObject = info
             binding.viewModel = viewModel
-            viewModel.bind(info)
+            viewModel.bind(info, this)
         }
 
         fun isFeatured(): Boolean {
-            return infoObject.isFeatured
+            return viewModel.infoObject.value!!.isFeatured
         }
 
+        override fun onNavigateToInfo() {
+            val bundle = bundleOf(DetailActivity.INFO_OBJECT_TAG
+                    to viewModel.infoObject.value)
+
+            Navigation
+                .findNavController(binding.root)
+                .navigate(
+                    R.id.navigate_to_detail_activity, bundle,
+                    NavOptions.Builder()
+                        .setLaunchSingleTop(true)
+                        .build()
+                )
+        }
     }
 }

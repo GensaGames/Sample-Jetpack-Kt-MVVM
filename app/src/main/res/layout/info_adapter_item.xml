@@ -10,9 +10,11 @@
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
-                                                       android:layout_width="200dp"
-                                                       android:layout_height="150dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:onClick="@{() -> viewModel.navigateToInfo()}">
 
 
         <androidx.cardview.widget.CardView
@@ -29,9 +31,9 @@
 
 
             <sample.settings.gensagames.samplejetpackmvvm.utils.KenBurnsView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:kenburnsImages="@{viewModel.getImageUrl()}"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:kenburnsImages="@{viewModel.getInfoObject().getImageUrl()}"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -48,7 +50,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/mainCardView"
                 app:layout_constraintStart_toStartOf="@+id/mainCardView"
                 app:layout_constraintTop_toTopOf="@+id/mainCardView"
-                app:mutableText="@{viewModel.getHeader()}"
+                app:staticText="@{viewModel.getInfoObject().getName()}"
                 tools:text="Alisa N.K."/>
 
         <TextView
@@ -63,7 +65,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/mainCardView"
                 app:layout_constraintStart_toStartOf="@+id/mainCardView"
                 app:layout_constraintTop_toBottomOf="@id/textHeader"
-                app:mutableText="@{viewModel.getContact()}"
+                app:staticText="@{viewModel.getInfoObject().getContact()}"
                 tools:text="Alisa.Home.NK@gmail.com"/>
 
         <TextView
@@ -80,7 +82,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/mainCardView"
                 app:layout_constraintStart_toStartOf="@+id/mainCardView"
                 app:layout_constraintTop_toBottomOf="@id/textDescription"
-                app:mutableText="@{viewModel.getSummary()}"
+                app:staticText="@{viewModel.getInfoObject().getSummary()}"
                 tools:text="...."/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
