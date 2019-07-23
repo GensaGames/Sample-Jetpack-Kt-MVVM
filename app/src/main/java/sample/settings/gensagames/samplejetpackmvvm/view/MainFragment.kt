@@ -51,7 +51,6 @@ class MainFragment : Fragment() {
             )
         binding.recyclerView.adapter = infoAdapter
 
-
         val viewModel = ViewModelProviders.of(this)
             .get(MainViewModel::class.java)
         binding.viewModel = viewModel

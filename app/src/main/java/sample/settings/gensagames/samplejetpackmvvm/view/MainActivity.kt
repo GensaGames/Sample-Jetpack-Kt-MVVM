@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.main_activity.*
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.view.base.BaseActivity
+import androidx.appcompat.app.AlertDialog
 
 
 class MainActivity : BaseActivity() {
@@ -22,12 +23,13 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
-            Navigation
-                .findNavController(this@MainActivity, R.id.main_content)
-                .navigate(R.id.navigate_to_detail_activity, null,
-                    NavOptions.Builder()
-                        .setLaunchSingleTop(true)
-                        .build())
+            val dialog = AlertDialog.Builder(this)
+                .setTitle(getString(android.R.string
+                    .VideoView_error_text_unknown))
+                .setMessage("Not available right now.")
+                .setNeutralButton(android.R.string.ok, null)
+
+            dialog.create().show()
         }
     }
 

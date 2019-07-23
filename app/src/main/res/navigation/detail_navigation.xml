@@ -10,6 +10,9 @@
             android:name="sample.settings.gensagames.samplejetpackmvvm.view.DetailFragment"
             android:label="Detail Fragment"
             tools:layout="@layout/detail_fragment">
+
+        <argument android:name="infoObject"
+                  app:argType="sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject"/>
     </fragment>
 
 </navigation>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".view.DetailActivity">
+
+    <data>
+        <variable
+                name="viewModel"
+                type="sample.settings.gensagames.samplejetpackmvvm.viewmodel.DetailViewModel"/>
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:showIn="@layout/detail_fragment">
+
+        <TextView
+                android:id="@+id/textViewContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                tools:text="Sample Text Content"
+                app:mutableText="@{viewModel.getTextContent()}"/>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>
