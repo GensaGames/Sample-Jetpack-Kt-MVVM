@@ -1,4 +1,4 @@
-package sample.settings.gensagames.samplejetpackmvvm.view.inject
+package sample.settings.gensagames.samplejetpackmvvm.inject.models
 
 import dagger.Component
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel

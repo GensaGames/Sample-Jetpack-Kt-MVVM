@@ -3,7 +3,6 @@ package sample.settings.gensagames.samplejetpackmvvm.inject
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import sample.settings.gensagames.samplejetpackmvvm.MainActivityTest
-import sample.settings.gensagames.samplejetpackmvvm.view.inject.ApplicationComponent
 import javax.inject.Singleton
 
 /**

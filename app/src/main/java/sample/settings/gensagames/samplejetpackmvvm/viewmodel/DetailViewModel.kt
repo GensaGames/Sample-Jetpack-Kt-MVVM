@@ -1,22 +1,28 @@
 package sample.settings.gensagames.samplejetpackmvvm.viewmodel
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.thedeanda.lorem.LoremIpsum
-import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.BaseViewModel
+import javax.inject.Inject
 
-class DetailViewModel constructor(info: InfoObject) : BaseViewModel() {
+class DetailViewModel @Inject constructor() : BaseViewModel() {
+
+    @Inject
+    lateinit var infoObjectNew : InfoObject
 
     val infoObject: MutableLiveData<InfoObject> = MutableLiveData()
+        get() {
+            field.value?:let {
+                field.value = infoObjectNew
+            }
+            return field
+        }
 
-    init {
-        Log.d(TAG, "Received InfoObject: $info")
-        infoObject.value = info
-    }
 
     val textContent: MutableLiveData<String> = MutableLiveData()
         get() {

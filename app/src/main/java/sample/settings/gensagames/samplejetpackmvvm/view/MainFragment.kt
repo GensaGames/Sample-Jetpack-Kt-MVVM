@@ -39,6 +39,8 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
+        sampleContextHelper.logSampleInfo(context!!)
+
         bind()
         observe()
     }

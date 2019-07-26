@@ -35,8 +35,7 @@
                 <sample.settings.gensagames.samplejetpackmvvm.utils.KenBurnsView
                     android:id="@+id/headerKenburnsView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:kenburnsImages="@{viewModel.getInfoObject().getImageUrl()}" />
+                    android:layout_height="match_parent"/>
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"

@@ -7,7 +7,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
-import sample.settings.gensagames.samplejetpackmvvm.view.inject.DaggerApplicationComponent
+import sample.settings.gensagames.samplejetpackmvvm.inject.DaggerApplicationComponent
 import javax.inject.Inject
 
 
