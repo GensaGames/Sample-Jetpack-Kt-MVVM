@@ -2,6 +2,7 @@ package sample.settings.gensagames.samplejetpackmvvm.utils
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.text.Spanned
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -14,6 +15,7 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import timber.log.Timber
 
 
 @BindingAdapter("mutableVisibility")
@@ -42,26 +44,34 @@ fun setStaticText(view: TextView, text: String?) {
         view.text = text ?: ""
     }
 }
+@BindingAdapter("staticSpanned")
+fun setStaticSpanned(view: TextView, text: Spanned?) {
+    val parentActivity:AppCompatActivity? = view.getParentActivity()
+    if (parentActivity != null) {
+        view.text = text ?: ""
+    }
+}
 
-@BindingAdapter("kenburnsImages")
-fun setKenburnsImages(view: KenBurnsView, url : String?) {
+
+@BindingAdapter("staticKenburnsImages")
+fun setStaticKenburnsImages(view: KenBurnsView, url : String?) {
 
     val target = object : CustomTarget<Bitmap>(){
         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-            Log.d(TAG, "onResourceReady.")
+            Timber.d( "onResourceReady.")
             view.setResourceIds(resource, resource)
         }
         override fun onLoadCleared(placeholder: Drawable?) {
         }
 
         override fun onLoadFailed(errorDrawable: Drawable?) {
-            Log.e(TAG, "onLoadFailed. Loading random!")
+            Timber.e( "onLoadFailed. Loading random!")
             super.onLoadFailed(errorDrawable)
             /**
              * Just Stub to load random Image.
              */
             val newUrl = "https://picsum.photos/800"
-            setKenburnsImages(view, newUrl)
+            setStaticKenburnsImages(view, newUrl)
         }
     }
 

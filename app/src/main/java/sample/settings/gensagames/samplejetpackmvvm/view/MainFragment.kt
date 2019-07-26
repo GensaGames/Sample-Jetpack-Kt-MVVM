@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.detail_fragment.*
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.databinding.MainFragmentBinding
 import sample.settings.gensagames.samplejetpackmvvm.model.SampleContextHelper
@@ -39,37 +41,53 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
-        sampleContextHelper.logSampleInfo(context!!)
 
+        setupToolbar()
         bind()
         observe()
     }
+    private fun setupToolbar() {
+        (activity as MainActivity).setSupportActionBar(toolbar)
+        toolbar.setTitle(R.string.app_name)
+    }
 
     private fun bind() {
+        sampleContextHelper.logSampleInfo(context!!)
+
         val infoAdapter = MainGridInfoAdapter()
-        binding.recyclerView.layoutManager =
+        binding.mainContent.recyclerView.layoutManager =
             GridLayoutManager(context,
                 GRID_SIZE
             )
-        binding.recyclerView.adapter = infoAdapter
+        binding.mainContent.recyclerView.adapter = infoAdapter
 
         val viewModel = ViewModelProviders.of(this)
             .get(MainViewModel::class.java)
         binding.viewModel = viewModel
+
+        fab.setOnClickListener {
+            val dialog = AlertDialog.Builder(context!!)
+                .setTitle(getString(android.R.string
+                    .VideoView_error_text_unknown))
+                .setMessage("Not available right now.")
+                .setNeutralButton(android.R.string.ok, null)
+
+            dialog.create().show()
+        }
     }
 
 
     private fun observe() {
         binding.viewModel!!.getLoadingInfoItems().observe(this,
             Observer<List<InfoObject>> { t ->
-                (binding.recyclerView.adapter as MainGridInfoAdapter)
+                (binding.mainContent.recyclerView.adapter as MainGridInfoAdapter)
                     .setInfoCollection(t ?: emptyList())
             })
 
         binding.viewModel!!.getHeaderIntro().observe(this,
             Observer { t ->
-                binding.textMainHeader1.text = t.header
-                binding.textMainHeader2.text = t.message
+                binding.mainContent.textMainHeader1.text = t.header
+                binding.mainContent.textMainHeader2.text = t.message
             })
     }
 }

@@ -18,19 +18,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.main_activity)
-        setSupportActionBar(toolbar)
-
-        fab.setOnClickListener {
-            val dialog = AlertDialog.Builder(this)
-                .setTitle(getString(android.R.string
-                    .VideoView_error_text_unknown))
-                .setMessage("Not available right now.")
-                .setNeutralButton(android.R.string.ok, null)
-
-            dialog.create().show()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

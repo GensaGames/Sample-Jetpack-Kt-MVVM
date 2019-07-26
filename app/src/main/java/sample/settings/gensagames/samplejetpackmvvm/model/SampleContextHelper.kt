@@ -1,9 +1,7 @@
 package sample.settings.gensagames.samplejetpackmvvm.model
 
 import android.content.Context
-import android.util.Log
-import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
-import sample.settings.gensagames.samplejetpackmvvm.view.MainActivity
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -13,7 +11,7 @@ import javax.inject.Inject
 open class SampleContextHelper @Inject constructor() {
 
     fun logSampleInfo(context : Context) {
-        Log.d(TAG, String.format("logSampleInfo. " +
+        Timber.d( String.format("logSampleInfo. " +
                 "Object: %s", context.hashCode()))
     }
 }

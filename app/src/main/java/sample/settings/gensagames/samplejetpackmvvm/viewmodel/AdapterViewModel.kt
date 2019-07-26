@@ -1,14 +1,9 @@
 package sample.settings.gensagames.samplejetpackmvvm.viewmodel
 
-import android.util.Log
-import androidx.core.os.bundleOf
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
-import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
-import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.BaseViewModel
+import timber.log.Timber
 
 class AdapterViewModel : BaseViewModel() {
 
@@ -25,7 +20,7 @@ class AdapterViewModel : BaseViewModel() {
     }
 
     fun navigateToInfo() {
-        Log.d(TAG, "navigateToInfo: $this")
+        Timber.d( "navigateToInfo: $this")
         onNavigate.onNavigateToInfo()
     }
 }

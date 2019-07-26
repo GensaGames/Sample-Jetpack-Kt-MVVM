@@ -1,12 +1,8 @@
 package sample.settings.gensagames.samplejetpackmvvm.viewmodel
 
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.thedeanda.lorem.LoremIpsum
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
-import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.BaseViewModel
 import javax.inject.Inject
 

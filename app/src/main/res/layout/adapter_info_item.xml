@@ -33,7 +33,7 @@
             <sample.settings.gensagames.samplejetpackmvvm.utils.KenBurnsView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:kenburnsImages="@{viewModel.getInfoObject().getImageUrl()}"/>
+                    app:staticKenburnsImages="@{viewModel.getInfoObject().getImageUrl()}"/>
 
         </androidx.cardview.widget.CardView>
 

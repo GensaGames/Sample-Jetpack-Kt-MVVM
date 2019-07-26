@@ -17,9 +17,11 @@ import kotlinx.android.synthetic.main.detail_fragment.*
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.databinding.DetailFragmentBinding
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
-import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
-import sample.settings.gensagames.samplejetpackmvvm.utils.setKenburnsImages
+import sample.settings.gensagames.samplejetpackmvvm.utils.setStaticKenburnsImages
+import sample.settings.gensagames.samplejetpackmvvm.utils.setStaticSpanned
+import sample.settings.gensagames.samplejetpackmvvm.utils.setStaticText
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.DetailViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -27,7 +29,6 @@ class DetailFragment : Fragment() {
 
     private lateinit var args: DetailFragmentArgs
     private lateinit var binding: DetailFragmentBinding
-
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -38,7 +39,7 @@ class DetailFragment : Fragment() {
         args = DetailFragmentArgs.fromBundle(
             requireActivity().intent.extras!!
         )
-        Log.d(TAG, "onCreateView with Args: $args")
+        Timber.d("onCreateView with Args: $args")
     }
 
     override fun onCreateView(
@@ -79,12 +80,12 @@ class DetailFragment : Fragment() {
 
     private fun observe() {
         binding.viewModel!!.textContent.observe(this, Observer<String> { t ->
-            binding.detailContent.textViewContent.text =
-                Html.fromHtml(t, Html.FROM_HTML_MODE_COMPACT)
+            setStaticSpanned(binding.detailContent.textViewContent,
+                Html.fromHtml(t, Html.FROM_HTML_MODE_COMPACT))
         })
 
-        binding.viewModel!!.textContent.observe(this, Observer<String> { t ->
-            setKenburnsImages(binding.headerKenburnsView, t)
+        binding.viewModel!!.infoObject.observe(this, Observer<InfoObject> { t ->
+            setStaticKenburnsImages(binding.headerKenburnsView, t.imageUrl)
         })
     }
 

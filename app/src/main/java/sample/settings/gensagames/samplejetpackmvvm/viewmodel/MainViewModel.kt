@@ -8,9 +8,9 @@ import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi
 import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi2
-import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.BaseViewModel
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.OnLoadingInfo
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainViewModel : BaseViewModel(), OnLoadingInfo {
@@ -26,18 +26,18 @@ class MainViewModel : BaseViewModel(), OnLoadingInfo {
     <InfoObject>> = MutableLiveData()
 
     fun getLoadingInfoItems() : LiveData<List<InfoObject>> {
-        Log.d(TAG, "getLoadingInfoItems.")
+        Timber.d( "getLoadingInfoItems.")
         loadingInfoItems.value ?: loadInfoData()
         return loadingInfoItems
     }
 
     private fun loadInfoData() {
-        Log.d(TAG, "updateResponse.")
+        Timber.d( "updateResponse.")
         loadingStatus.value = View.VISIBLE
         loadingInfoItems.postValue(emptyList())
 
         Thread(Runnable {
-            Log.d(TAG, String.format("Start updateResponse. " +
+            Timber.d( String.format("Start updateResponse. " +
                     "Using SampleApi2 Tag: %s", sampleApi2.getInfo()))
             Thread.sleep(1000)
 
@@ -46,10 +46,10 @@ class MainViewModel : BaseViewModel(), OnLoadingInfo {
     }
 
     override fun onLoaded(objects : List<InfoObject>) {
-        Log.d(TAG, String.format("onLoaded. Status Sample: %s",
+        Timber.d( String.format("onLoaded. Status Sample: %s",
             sampleApi.getSampleStatus("Test")))
 
-        Log.d(TAG, "onLoaded. Objects: $objects")
+        Timber.d( "onLoaded. Objects: $objects")
         loadingStatus.postValue(View.GONE)
         loadingInfoItems.postValue(objects)
     }

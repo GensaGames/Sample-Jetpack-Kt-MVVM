@@ -1,7 +1,6 @@
 package sample.settings.gensagames.samplejetpackmvvm.model.net
 
-import android.util.Log
-import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -14,7 +13,7 @@ class SampleApi @Inject constructor() {
 
         fun innerValid() : Boolean {
             val result = Random(System.currentTimeMillis()).nextBoolean()
-            Log.d(TAG, String.format("Returning Sample API Response: %s", result))
+            Timber.d( String.format("Returning Sample API Response: %s", result))
             return result
         }
 

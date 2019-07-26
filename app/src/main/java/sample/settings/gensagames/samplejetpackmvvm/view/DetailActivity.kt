@@ -2,9 +2,6 @@ package sample.settings.gensagames.samplejetpackmvvm.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.detail_fragment.*
-import kotlinx.android.synthetic.main.main_activity.*
-import kotlinx.android.synthetic.main.main_activity.toolbar
 import sample.settings.gensagames.samplejetpackmvvm.R
 
 class DetailActivity : AppCompatActivity() {

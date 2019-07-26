@@ -1,6 +1,5 @@
 package sample.settings.gensagames.samplejetpackmvvm.view.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -9,20 +8,20 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import sample.settings.gensagames.samplejetpackmvvm.R
-import sample.settings.gensagames.samplejetpackmvvm.databinding.InfoAdapterItemBinding
+import sample.settings.gensagames.samplejetpackmvvm.databinding.AdapterInfoItemBinding
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
-import sample.settings.gensagames.samplejetpackmvvm.utils.TAG
 import sample.settings.gensagames.samplejetpackmvvm.view.DetailActivity
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.AdapterViewModel
+import timber.log.Timber
 
 class MainGridInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var infoObjects: List<InfoObject>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoViewHolder {
-        val binding: InfoAdapterItemBinding = DataBindingUtil.inflate(
+        val binding: AdapterInfoItemBinding = DataBindingUtil.inflate(
             LayoutInflater
-                .from(parent.context), R.layout.info_adapter_item, parent, false
+                .from(parent.context), R.layout.adapter_info_item, parent, false
         )
         return InfoViewHolder(binding)
     }
@@ -37,13 +36,13 @@ class MainGridInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun setInfoCollection(objects: Collection<InfoObject>) {
-        Log.d(TAG, String.format("setInfoCollection. Size: %s", objects.size))
+        Timber.d( String.format("setInfoCollection. Size: %s", objects.size))
         infoObjects = objects.toList()
         notifyDataSetChanged()
     }
 
 
-    class InfoViewHolder(private val binding: InfoAdapterItemBinding)
+    class InfoViewHolder(private val binding: AdapterInfoItemBinding)
         : RecyclerView.ViewHolder(binding.root), AdapterViewModel.OnNavigate {
 
         private val viewModel = AdapterViewModel()
