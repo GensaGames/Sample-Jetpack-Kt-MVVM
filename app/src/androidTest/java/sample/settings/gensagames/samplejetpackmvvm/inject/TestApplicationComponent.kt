@@ -3,7 +3,7 @@ package sample.settings.gensagames.samplejetpackmvvm.inject
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import sample.settings.gensagames.samplejetpackmvvm.MainActivityTest
-import sample.settings.gensagames.samplejetpackmvvm.view.inject.ActivityComponent
+import sample.settings.gensagames.samplejetpackmvvm.view.inject.ApplicationComponent
 import javax.inject.Singleton
 
 /**
@@ -12,7 +12,7 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(modules = [AndroidInjectionModule::class, TestActivityModule::class])
-interface TestActivityComponent : ActivityComponent {
+interface TestApplicationComponent : ApplicationComponent {
 
     fun inject(test: MainActivityTest)
 }

@@ -8,7 +8,7 @@ import sample.settings.gensagames.samplejetpackmvvm.MainActivityTest
 
 @RunWith(AndroidJUnit4::class)
 abstract class BaseInstrumentedTest {
-    private val injector: TestActivityComponent = DaggerTestActivityComponent
+    private val injector: TestApplicationComponent = DaggerTestActivityComponent
         .builder()
         .build()
 

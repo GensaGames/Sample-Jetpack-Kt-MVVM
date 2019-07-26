@@ -1,11 +1,10 @@
 package sample.settings.gensagames.samplejetpackmvvm.viewmodel.base
 
 import androidx.lifecycle.ViewModel
-import sample.settings.gensagames.samplejetpackmvvm.view.inject.DaggerViewModelComponent
-import sample.settings.gensagames.samplejetpackmvvm.view.inject.MainApiModule
-import sample.settings.gensagames.samplejetpackmvvm.view.inject.ViewModelComponent
+import sample.settings.gensagames.samplejetpackmvvm.view.inject.DaggerModelComponent
+import sample.settings.gensagames.samplejetpackmvvm.view.inject.ModelModule
+import sample.settings.gensagames.samplejetpackmvvm.view.inject.ModelComponent
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel
-import android.app.Application
 import androidx.lifecycle.ViewModelProvider
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.DetailViewModel
@@ -13,9 +12,9 @@ import sample.settings.gensagames.samplejetpackmvvm.viewmodel.DetailViewModel
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val injector: ViewModelComponent = DaggerViewModelComponent
+    private val injector: ModelComponent = DaggerModelComponent
         .builder()
-        .module(MainApiModule())
+        .module(ModelModule())
         .build()
 
     init {

@@ -7,7 +7,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
-import sample.settings.gensagames.samplejetpackmvvm.view.inject.DaggerActivityComponent
+import sample.settings.gensagames.samplejetpackmvvm.view.inject.DaggerApplicationComponent
 import javax.inject.Inject
 
 
@@ -21,7 +21,7 @@ class MainApplication : Application(), HasActivityInjector, HasSupportFragmentIn
 
     override fun onCreate() {
         super.onCreate()
-        DaggerActivityComponent.create().inject(this);
+        DaggerApplicationComponent.create().inject(this);
     }
 
 

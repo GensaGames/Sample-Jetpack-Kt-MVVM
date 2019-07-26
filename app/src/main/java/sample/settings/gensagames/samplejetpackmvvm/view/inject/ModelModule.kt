@@ -6,7 +6,7 @@ import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi2
 import javax.inject.Singleton
 
 @Module
-class MainApiModule {
+class ModelModule {
 
     @Provides
     @Singleton

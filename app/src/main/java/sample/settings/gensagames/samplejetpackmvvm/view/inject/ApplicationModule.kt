@@ -7,7 +7,7 @@ import sample.settings.gensagames.samplejetpackmvvm.view.MainFragment
 
 
 @Module
-abstract class MainActivityModule {
+abstract class ApplicationModule {
 
     @ContributesAndroidInjector
     abstract fun contributeActivityInjector(): MainActivity
