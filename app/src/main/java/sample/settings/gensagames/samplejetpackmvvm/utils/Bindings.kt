@@ -15,41 +15,46 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import sample.settings.gensagames.samplejetpackmvvm.BuildConfig
 import timber.log.Timber
+import java.lang.RuntimeException
 
 
 @BindingAdapter("mutableVisibility")
 fun setMutableVisibility(view: View, visibility: MutableLiveData<Int>?) {
-    val parentActivity: AppCompatActivity? = view.getParentActivity()
-
-    if (parentActivity != null && visibility != null) {
-        visibility.observe(parentActivity, Observer { value ->
-            view.visibility = value?:View.VISIBLE})
+    if (BuildConfig.DEBUG) {
+        view.getParentActivity()
+            ?: throw RuntimeException()
     }
+    visibility?.observe(view.context as AppCompatActivity,
+        Observer { value -> view.visibility = value?:View.VISIBLE})
 }
 
 @BindingAdapter("mutableText")
 fun setMutableText(view: TextView, text: MutableLiveData<String>?) {
-    val parentActivity:AppCompatActivity? = view.getParentActivity()
-
-    if (parentActivity != null && text != null) {
-        text.observe(parentActivity, Observer { value -> view.text = value?:""})
+    if (BuildConfig.DEBUG) {
+        view.getParentActivity()
+            ?: throw RuntimeException()
     }
+    text?.observe(view.context as AppCompatActivity,
+        Observer { value -> view.text = value?:""})
 }
 
 @BindingAdapter("staticText")
 fun setStaticText(view: TextView, text: String?) {
-    val parentActivity:AppCompatActivity? = view.getParentActivity()
-    if (parentActivity != null) {
-        view.text = text ?: ""
+    if (BuildConfig.DEBUG) {
+        view.getParentActivity()
+            ?: throw RuntimeException()
     }
+    view.text = text ?: ""
 }
 @BindingAdapter("staticSpanned")
 fun setStaticSpanned(view: TextView, text: Spanned?) {
-    val parentActivity:AppCompatActivity? = view.getParentActivity()
-    if (parentActivity != null) {
-        view.text = text ?: ""
+    if (BuildConfig.DEBUG) {
+        view.getParentActivity()
+            ?: throw RuntimeException()
     }
+    view.text = text ?: ""
 }
 
 
