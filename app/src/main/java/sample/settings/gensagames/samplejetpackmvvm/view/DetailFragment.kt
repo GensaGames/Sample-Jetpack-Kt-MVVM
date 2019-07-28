@@ -16,10 +16,6 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.detail_fragment.*
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.databinding.DetailFragmentBinding
-import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
-import sample.settings.gensagames.samplejetpackmvvm.utils.setStaticKenburnsImages
-import sample.settings.gensagames.samplejetpackmvvm.utils.setStaticSpanned
-import sample.settings.gensagames.samplejetpackmvvm.utils.setStaticText
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.DetailViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -62,7 +58,6 @@ class DetailFragment : Fragment() {
 
         setupToolbar()
         bind()
-        observe()
     }
 
     private fun setupToolbar() {
@@ -76,17 +71,6 @@ class DetailFragment : Fragment() {
         )
             .get(DetailViewModel::class.java)
         binding.viewModel = viewModel
-    }
-
-    private fun observe() {
-        binding.viewModel!!.textContent.observe(this, Observer<String> { t ->
-            setStaticSpanned(binding.detailContent.textViewContent,
-                Html.fromHtml(t, Html.FROM_HTML_MODE_COMPACT))
-        })
-
-        binding.viewModel!!.infoObject.observe(this, Observer<InfoObject> { t ->
-            setStaticKenburnsImages(binding.headerKenburnsView, t.imageUrl)
-        })
     }
 
 }
