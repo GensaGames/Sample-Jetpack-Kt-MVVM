@@ -24,7 +24,7 @@ class DetailViewModel @Inject constructor() : BaseViewModel() {
         get() {
             field.value?:let {
                 field.value = LoremIpsum
-                    .getInstance().getWords(15, 30)
+                    .getInstance().getWords(50, 100)
             }
             return field
         }
