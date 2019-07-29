@@ -40,8 +40,8 @@ class SampleApi2 @Inject constructor(
 
     fun getHeaderIntroObject(): HeaderIntroObject {
         return HeaderIntroObject(
-            LoremIpsum.getInstance().country,
-            LoremIpsum.getInstance().city
+            LoremIpsum.getInstance().firstName,
+            LoremIpsum.getInstance().lastName
         )
     }
 

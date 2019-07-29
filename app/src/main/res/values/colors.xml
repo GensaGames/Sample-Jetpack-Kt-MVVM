@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#040086</color>
     <color name="colorPrimaryDark">#002757</color>
+    <color name="colorPrimaryLight">#5F5BC7</color>
     <color name="colorAccent">#DD165F</color>
 
     <!--Main Activity scope-->

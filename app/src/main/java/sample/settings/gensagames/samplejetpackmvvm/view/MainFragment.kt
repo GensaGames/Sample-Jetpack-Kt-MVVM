@@ -78,16 +78,12 @@ class MainFragment : Fragment() {
 
 
     private fun observe() {
-        binding.viewModel!!.getLoadingInfoItems().observe(this,
-            Observer<List<InfoObject>> { t ->
-                (binding.mainContent.recyclerView.adapter as MainGridInfoAdapter)
-                    .setInfoCollection(t ?: emptyList())
-            })
-
-        binding.viewModel!!.getHeaderIntro().observe(this,
-            Observer { t ->
-                binding.mainContent.textMainHeader1.text = t.header
-                binding.mainContent.textMainHeader2.text = t.message
-            })
+        binding.viewModel!!.apply {
+            loadingInfoItems.observe(this@MainFragment,
+                Observer<List<InfoObject>> { t ->
+                    (binding.mainContent.recyclerView.adapter as MainGridInfoAdapter)
+                        .setInfoCollection(t ?: emptyList())
+                })
+        }
     }
 }

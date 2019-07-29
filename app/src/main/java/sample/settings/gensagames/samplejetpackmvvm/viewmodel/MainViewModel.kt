@@ -21,20 +21,29 @@ class MainViewModel : BaseViewModel(), OnLoadingInfo {
     lateinit var sampleApi2: SampleApi2
 
     val loadingStatus: MutableLiveData<Int> = MutableLiveData()
-    private val headerIntro: MutableLiveData<HeaderIntroObject> = MutableLiveData()
-    private val loadingInfoItems : MutableLiveData<List
-    <InfoObject>> = MutableLiveData()
 
-    fun getLoadingInfoItems() : LiveData<List<InfoObject>> {
-        Timber.d( "getLoadingInfoItems.")
-        loadingInfoItems.value ?: loadInfoData()
-        return loadingInfoItems
-    }
+    val headerIntro: MutableLiveData<HeaderIntroObject> = MutableLiveData()
+        get() {
+            Timber.d( "getHeaderIntro.")
+            field.value ?:let {
+                field.value = sampleApi2.getHeaderIntroObject()
+            }
+            return field
+        }
+
+    val loadingInfoItems : MutableLiveData<List<InfoObject>> = MutableLiveData()
+        get() {
+            Timber.d( "getLoadingInfoItems.")
+            field.value ?:let {
+                field.postValue(emptyList())
+                loadInfoData()
+            }
+            return field
+        }
 
     private fun loadInfoData() {
         Timber.d( "updateResponse.")
         loadingStatus.value = View.VISIBLE
-        loadingInfoItems.postValue(emptyList())
 
         Thread(Runnable {
             Timber.d( String.format("Start updateResponse. " +
@@ -52,13 +61,6 @@ class MainViewModel : BaseViewModel(), OnLoadingInfo {
         Timber.d( "onLoaded. Objects: $objects")
         loadingStatus.postValue(View.GONE)
         loadingInfoItems.postValue(objects)
-    }
-
-    fun getHeaderIntro() : LiveData<HeaderIntroObject>  {
-        headerIntro.value ?:let {
-            headerIntro.value = sampleApi2.getHeaderIntroObject()
-        }
-        return headerIntro
     }
 
 }

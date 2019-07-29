@@ -12,9 +12,33 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import timber.log.Timber
 
+
+@BindingAdapter("introObjectHeader")
+fun setIntroObjectHeader(view: TextView, info: MutableLiveData<HeaderIntroObject>?) {
+    setHeaderIntro(view, info, action={
+            v : View, i : HeaderIntroObject ->
+        (v as TextView).text = i.header
+    })
+}
+
+@BindingAdapter("introObjectMessage")
+fun setIntroObjectMessage(view: TextView, info: MutableLiveData<HeaderIntroObject>?) {
+    setHeaderIntro(view, info, action={
+            v : View, i : HeaderIntroObject ->
+        (v as TextView).text = i.message
+    })
+}
+
+fun setHeaderIntro(view: View, intro: MutableLiveData<HeaderIntroObject>?,
+                  action: (v: View, i: HeaderIntroObject) -> Unit) {
+    intro?.observe(
+        view.getParentActivity()!!,
+        Observer { value -> action(view, value)})
+}
 
 @BindingAdapter("mutableVisibility")
 fun setMutableVisibility(view: View, visibility: MutableLiveData<Int>?) {
