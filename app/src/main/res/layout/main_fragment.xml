@@ -32,7 +32,7 @@
         <include
                 android:id="@+id/main_content"
                 layout="@layout/main_content"
-                bind:viewModel="@{viewModel}" />
+                bind:viewModel="@{viewModel}"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"

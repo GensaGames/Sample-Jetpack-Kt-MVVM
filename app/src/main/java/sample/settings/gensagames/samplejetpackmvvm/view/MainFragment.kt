@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.detail_fragment.*
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.databinding.MainFragmentBinding
 import sample.settings.gensagames.samplejetpackmvvm.model.SampleContextHelper
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.view.adapter.MainGridInfoAdapter
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel
@@ -78,11 +79,17 @@ class MainFragment : Fragment() {
 
 
     private fun observe() {
+
         binding.viewModel!!.apply {
             loadingInfoItems.observe(this@MainFragment,
                 Observer<List<InfoObject>> { t ->
                     (binding.mainContent.recyclerView.adapter as MainGridInfoAdapter)
                         .setInfoCollection(t ?: emptyList())
+                })
+
+            headerIntro.observe(this@MainFragment,
+                Observer<HeaderIntroObject> { t ->
+                    binding.mainContent.headerIntro = t
                 })
         }
     }

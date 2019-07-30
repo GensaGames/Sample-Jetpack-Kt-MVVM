@@ -8,8 +8,12 @@
         <variable
                 name="viewModel"
                 type="sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel"/>
-    </data>
 
+
+        <variable
+                name="headerIntro"
+                type="sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject"/>
+    </data>
 
     <FrameLayout
             android:layout_width="match_parent"
@@ -39,7 +43,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    app:introObjectHeader="@{viewModel.getHeaderIntro()}"
+                    android:text="@{headerIntro.header}"
                     tools:text="Header"/>
 
             <TextView
@@ -49,7 +53,7 @@
                     android:layout_weight="1"
                     android:textStyle="bold"
                     android:gravity="center"
-                    app:introObjectMessage="@{viewModel.getHeaderIntro()}"
+                    android:text="@{headerIntro.message}"
                     android:textColor="@android:color/white"
                     tools:text="Message"/>
         </LinearLayout>
