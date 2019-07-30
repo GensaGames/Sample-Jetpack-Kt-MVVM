@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import timber.log.Timber
 

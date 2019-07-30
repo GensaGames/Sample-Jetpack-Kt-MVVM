@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.databinding.AdapterInfoItemBinding
+import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.view.DetailActivity
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.AdapterViewModel
@@ -49,6 +51,7 @@ class MainGridInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(info: InfoObject) {
             binding.viewModel = viewModel
+            binding.infoObject = info
             viewModel.bind(info, this)
         }
 

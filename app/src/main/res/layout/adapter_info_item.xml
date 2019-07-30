@@ -7,6 +7,10 @@
         <variable
                 name="viewModel"
                 type="sample.settings.gensagames.samplejetpackmvvm.viewmodel.AdapterViewModel"/>
+
+        <variable
+                name="infoObject"
+                type="sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject"/>
     </data>
 
 
@@ -47,10 +51,10 @@
                 android:padding="2dp"
                 android:background="@color/colorTransparentWhite"
                 android:textColor="@android:color/white"
+                android:text="@{infoObject.name}"
                 app:layout_constraintEnd_toEndOf="@+id/mainCardView"
                 app:layout_constraintStart_toStartOf="@+id/mainCardView"
                 app:layout_constraintTop_toTopOf="@+id/mainCardView"
-                app:infoObjectName="@{viewModel.getInfoObject()}"
                 tools:text="Alisa N.K."/>
 
         <TextView
@@ -62,10 +66,10 @@
                 android:textStyle="bold"
                 android:translationZ="10dp"
                 android:textColor="@android:color/white"
+                android:text="@{infoObject.contact}"
                 app:layout_constraintEnd_toEndOf="@+id/mainCardView"
                 app:layout_constraintStart_toStartOf="@+id/mainCardView"
                 app:layout_constraintTop_toBottomOf="@id/textHeader"
-                app:infoObjectContact="@{viewModel.getInfoObject()}"
                 tools:text="Alisa.Home.NK@gmail.com"/>
 
         <TextView
@@ -78,11 +82,11 @@
                 android:paddingBottom="5dp"
                 android:translationZ="10dp"
                 android:textColor="@android:color/white"
+                android:text="@{infoObject.summary}"
                 app:layout_constraintBottom_toBottomOf="@+id/mainCardView"
                 app:layout_constraintEnd_toEndOf="@+id/mainCardView"
                 app:layout_constraintStart_toStartOf="@+id/mainCardView"
                 app:layout_constraintTop_toBottomOf="@id/textDescription"
-                app:infoObjectSummary="@{viewModel.getInfoObject()}"
                 tools:text="...."/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
