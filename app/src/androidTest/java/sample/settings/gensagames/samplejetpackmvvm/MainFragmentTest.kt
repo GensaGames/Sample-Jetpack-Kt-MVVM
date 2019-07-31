@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest : BaseInstrumentedTest() {
+class MainFragmentTest : BaseInstrumentedTest() {
 
     companion object {
         private val ITEMS_TIME_TO = TimeUnit

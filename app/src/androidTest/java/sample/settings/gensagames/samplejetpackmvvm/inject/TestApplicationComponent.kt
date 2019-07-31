@@ -2,7 +2,7 @@ package sample.settings.gensagames.samplejetpackmvvm.inject
 
 import dagger.Component
 import dagger.android.AndroidInjectionModule
-import sample.settings.gensagames.samplejetpackmvvm.MainActivityTest
+import sample.settings.gensagames.samplejetpackmvvm.MainFragmentTest
 import javax.inject.Singleton
 
 /**
@@ -10,8 +10,9 @@ import javax.inject.Singleton
  * However, this is just an example for using it here.
  */
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, TestActivityModule::class])
+@Component(modules = [AndroidInjectionModule::class,
+    TestViewModule::class, VmFactoriesModule::class])
 interface TestApplicationComponent : ApplicationComponent {
 
-    fun inject(test: MainActivityTest)
+    fun inject(test: MainFragmentTest)
 }
