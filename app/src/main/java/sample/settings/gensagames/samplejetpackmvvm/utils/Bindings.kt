@@ -27,37 +27,6 @@ fun setMutableText(view: TextView, text: MutableLiveData<String>?) {
         Observer { value -> view.text = value?:""})
 }
 
-@BindingAdapter("infoObjectName")
-fun setInfoObjectName(view: TextView, info: MutableLiveData<InfoObject>?) {
-    setInfoObject(view, info, action={
-            v : View, i : InfoObject ->
-        (v as TextView).text = i.name
-    })
-}
-
-@BindingAdapter("infoObjectContact")
-fun setInfoObjectContact(view: TextView, info: MutableLiveData<InfoObject>?) {
-    setInfoObject(view, info, action={
-            v : View, i : InfoObject ->
-        (v as TextView).text = i.contact
-    })
-}
-
-@BindingAdapter("infoObjectSummary")
-fun setInfoObjectSummary(view: TextView, info: MutableLiveData<InfoObject>?) {
-    setInfoObject(view, info, action={
-            v : View, i : InfoObject ->
-        (v as TextView).text = i.summary
-    })
-}
-
-fun setInfoObject(view: View, info: MutableLiveData<InfoObject>?,
-                  action: (v: View, i: InfoObject) -> Unit) {
-    info?.observe(
-        view.getParentActivity()!!,
-        Observer { value -> action(view, value)})
-}
-
 @BindingAdapter("kenburnsImages")
 fun setKenburnsImages(view: KenBurnsView, info: MutableLiveData<InfoObject>?) {
     val loadImage = fun (v : View, i : InfoObject) : Unit {
@@ -82,6 +51,9 @@ fun setKenburnsImages(view: KenBurnsView, info: MutableLiveData<InfoObject>?) {
             .load(i.imageUrl)
             .into(target)
     }
-    setInfoObject(view, info, loadImage)
+
+    info?.observe(
+        view.getParentActivity()!!,
+        Observer { value -> loadImage(view, value)})
 }
 
