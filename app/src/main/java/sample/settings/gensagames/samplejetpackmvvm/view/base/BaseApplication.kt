@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.facebook.soloader.SoLoader
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -26,7 +27,10 @@ class BaseApplication : Application(), HasActivityInjector, HasSupportFragmentIn
 
     override fun onCreate() {
         super.onCreate()
+
         DaggerApplicationComponent.create().inject(this);
+        SoLoader.init(this, false);
+
         bind()
     }
 
