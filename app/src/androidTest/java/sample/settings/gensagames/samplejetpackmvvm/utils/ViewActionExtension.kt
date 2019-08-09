@@ -9,7 +9,6 @@ import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
-import sample.settings.gensagames.samplejetpackmvvm.view.adapter.MainGridInfoAdapter
 
 /**
  * Perform action of waiting for a specific time.
@@ -32,19 +31,20 @@ fun waitFor(millis: Long): ViewAction {
 
 /**
  * Matches the [RecyclerView]s is featured
+ * TODO(Tests) Fix port to Litho
  */
-fun isFeaturedViewHolder(): Matcher<MainGridInfoAdapter.InfoViewHolder> {
-    return object : TypeSafeMatcher<MainGridInfoAdapter.InfoViewHolder>() {
-        var isFirst : Boolean = false
-
-        override fun matchesSafely(
-            customHolder: MainGridInfoAdapter.InfoViewHolder): Boolean {
-            if (customHolder.isFeatured() && !isFirst) {
+fun isFeaturedViewHolder(): Matcher<Any> {
+    return object : TypeSafeMatcher<Any>() {
+        override fun matchesSafely(item: Any?): Boolean {
+            if (!isFirst) {
                 isFirst = true
                 return true
             }
             return false
         }
+
+        var isFirst : Boolean = false
+
 
         override fun describeTo(description: Description?) {
             description?.appendText(

@@ -1,9 +1,10 @@
 package sample.settings.gensagames.samplejetpackmvvm.view.base
 
 import android.app.Activity
-import android.app.Application
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.multidex.MultiDexApplication
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -17,7 +18,8 @@ import timber.log.Timber
 
 
 
-class BaseApplication : Application(), HasActivityInjector, HasSupportFragmentInjector {
+class BaseApplication : MultiDexApplication(), HasActivityInjector,
+    HasSupportFragmentInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
@@ -27,14 +29,25 @@ class BaseApplication : Application(), HasActivityInjector, HasSupportFragmentIn
 
     override fun onCreate() {
         super.onCreate()
-
+        /**
+         * Injection
+         */
         DaggerApplicationComponent.create().inject(this);
+        /**
+         * Native library loader
+         */
         SoLoader.init(this, false);
-
-        bind()
+        /**
+         * Image processing
+         */
+        Fresco.initialize(this)
+        /**
+         * Timber debug start
+         */
+        setupTrace()
     }
 
-    private fun bind() {
+    private fun setupTrace() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         } else {

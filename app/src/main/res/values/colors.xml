@@ -5,7 +5,11 @@
     <color name="colorPrimaryLight">#5F5BC7</color>
     <color name="colorAccent">#DD165F</color>
 
-    <!--Main Activity scope-->
-    <color name="colorTransparentWhite">#390C36A5</color>
+    <!-- Main Activity scope -->
+    <color name="colorTransparentWhite">#6D0C36A5</color>
+    <color name="colorTransparentRed">#CEA80F56</color>
+
+    <!-- Adapter -->
+    <color name="colorImagePlaceHolder">#6B0C36A5</color>
 
 </resources>

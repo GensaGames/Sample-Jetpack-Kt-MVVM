@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.detail_fragment.*
 import sample.settings.gensagames.samplejetpackmvvm.R
@@ -17,14 +16,11 @@ import sample.settings.gensagames.samplejetpackmvvm.databinding.MainFragmentBind
 import sample.settings.gensagames.samplejetpackmvvm.model.SampleContextHelper
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
-import sample.settings.gensagames.samplejetpackmvvm.view.adapter.MainGridInfoAdapter
+import sample.settings.gensagames.samplejetpackmvvm.view.adapter.AdapterListSpec
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
-    companion object {
-        const val GRID_SIZE = 2
-    }
 
     @Inject
     lateinit var sampleContextHelper: SampleContextHelper
@@ -44,28 +40,42 @@ class MainFragment : Fragment() {
         AndroidSupportInjection.inject(this)
 
         setupToolbar()
-        bind()
+
+        setupVm()
         observe()
     }
+
     private fun setupToolbar() {
         (activity as MainActivity).setSupportActionBar(toolbar)
         toolbar.setTitle(R.string.app_name)
     }
 
-    private fun bind() {
+    private fun setupVm() {
         sampleContextHelper.logSampleInfo(context!!)
-
-        val infoAdapter = MainGridInfoAdapter()
-        binding.mainContent.recyclerView.layoutManager =
-            GridLayoutManager(context,
-                GRID_SIZE
-            )
-        binding.mainContent.recyclerView.adapter = infoAdapter
 
         val viewModel = ViewModelProviders.of(this)
             .get(MainViewModel::class.java)
         binding.viewModel = viewModel
+    }
 
+
+    private fun observe() {
+        binding.viewModel!!.apply {
+            loadingInfoItems.observe(this@MainFragment,
+                Observer<List<InfoObject>> { t ->
+                    val view = AdapterListSpec.buildListItems(context!!, t)
+                    binding.mainContent.recyclerHolderView.addView(view)
+                })
+
+            headerIntro.observe(this@MainFragment,
+                Observer<HeaderIntroObject> { t ->
+                    binding.mainContent.headerIntro = t
+                })
+        }
+
+        /**
+         * TODO(Click Event): Move to the VM
+         */
         fab.setOnClickListener {
             val dialog = AlertDialog.Builder(context!!)
                 .setTitle(getString(android.R.string
@@ -74,23 +84,6 @@ class MainFragment : Fragment() {
                 .setNeutralButton(android.R.string.ok, null)
 
             dialog.create().show()
-        }
-    }
-
-
-    private fun observe() {
-
-        binding.viewModel!!.apply {
-            loadingInfoItems.observe(this@MainFragment,
-                Observer<List<InfoObject>> { t ->
-                    (binding.mainContent.recyclerView.adapter as MainGridInfoAdapter)
-                        .setInfoCollection(t ?: emptyList())
-                })
-
-            headerIntro.observe(this@MainFragment,
-                Observer<HeaderIntroObject> { t ->
-                    binding.mainContent.headerIntro = t
-                })
         }
     }
 }

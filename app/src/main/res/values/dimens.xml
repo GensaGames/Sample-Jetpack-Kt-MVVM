@@ -3,7 +3,25 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
-    <dimen name="header_elevation">20dp</dimen>
+    <!---->
+    <!--Header Params-->
+    <dimen name="header_elevation">30dp</dimen>
     <dimen name="header_circle_padding">30dp</dimen>
     <dimen name="scrolling_app_bar_height">320dp</dimen>
+
+    <!---->
+    <!--Text Params-->
+    <dimen name="padding_text_medium">10dp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_low">14sp</dimen>
+
+    <!---->
+    <!--Adapters-->
+    <dimen name="rounded_grid_corners">6dp</dimen>
+    <dimen name="grid_card_height">130dp</dimen>
+
+    <!---->
+    <!--Other-->
+    <dimen name="generic_padding_low">8dp</dimen>
+
 </resources>
