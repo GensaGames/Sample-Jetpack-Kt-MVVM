@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.detail_fragment.*
 import sample.settings.gensagames.samplejetpackmvvm.R
@@ -16,6 +19,7 @@ import sample.settings.gensagames.samplejetpackmvvm.databinding.MainFragmentBind
 import sample.settings.gensagames.samplejetpackmvvm.model.SampleContextHelper
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
+import sample.settings.gensagames.samplejetpackmvvm.utils.Event
 import sample.settings.gensagames.samplejetpackmvvm.view.adapter.AdapterListSpec
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.MainViewModel
 import javax.inject.Inject
@@ -28,11 +32,14 @@ class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
 
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.main_fragment, container, false)
+            inflater, R.layout.main_fragment, container, false
+        )
         return binding.root
     }
 
@@ -63,7 +70,13 @@ class MainFragment : Fragment() {
         binding.viewModel!!.apply {
             loadingInfoItems.observe(this@MainFragment,
                 Observer<List<InfoObject>> { t ->
-                    val view = AdapterListSpec.buildListItems(context!!, t)
+                    /**
+                     * TODO(Litho Create): Check before recreation
+                     */
+                    val view = AdapterListSpec.buildListItems(
+                        context!!, t,
+                        (binding.viewModel as MainViewModel).clickEvents
+                    )
                     binding.mainContent.recyclerHolderView.addView(view)
                 })
 
@@ -71,6 +84,13 @@ class MainFragment : Fragment() {
                 Observer<HeaderIntroObject> { t ->
                     binding.mainContent.headerIntro = t
                 })
+
+            navigateAction.observe(this@MainFragment, Observer<Event<InfoObject>> { t ->
+                t?.let {
+                    t.getContentIfNotHandled()?.let { navigateActionTo(it) }
+                }
+
+            })
         }
 
         /**
@@ -78,12 +98,32 @@ class MainFragment : Fragment() {
          */
         fab.setOnClickListener {
             val dialog = AlertDialog.Builder(context!!)
-                .setTitle(getString(android.R.string
-                    .VideoView_error_text_unknown))
+                .setTitle(
+                    getString(
+                        android.R.string
+                            .VideoView_error_text_unknown
+                    )
+                )
                 .setMessage("Not available right now.")
                 .setNeutralButton(android.R.string.ok, null)
 
             dialog.create().show()
         }
+    }
+
+    private fun navigateActionTo(info: InfoObject) {
+        val bundle = bundleOf(
+            DetailActivity.INFO_OBJECT_TAG
+                    to info
+        )
+
+        Navigation
+            .findNavController(binding.root)
+            .navigate(
+                R.id.navigate_to_detail_activity, bundle,
+                NavOptions.Builder()
+                    .setLaunchSingleTop(true)
+                    .build()
+            )
     }
 }

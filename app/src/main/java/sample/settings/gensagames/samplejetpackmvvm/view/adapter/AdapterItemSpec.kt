@@ -15,9 +15,12 @@ import com.facebook.yoga.YogaPositionType
 import com.thedeanda.lorem.LoremIpsum
 import sample.settings.gensagames.samplejetpackmvvm.R
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
+import com.facebook.litho.ClickEvent
+import com.facebook.litho.annotations.OnEvent
+import timber.log.Timber
 
 
-@LayoutSpec
+@LayoutSpec(events = [AdapterItemClickEvent::class])
 object AdapterItemSpec {
 
     @JvmStatic
@@ -29,7 +32,7 @@ object AdapterItemSpec {
             .backgroundColor(Color.WHITE)
             .heightRes(R.dimen.grid_card_height)
             .child(
-                KenburnsItem
+                KenburnItem
                     .create(c)
                     .widthPercent(100f)
                     .heightPercent(100f)
@@ -73,8 +76,18 @@ object AdapterItemSpec {
                     .create(c)
                     .cornerRadiusRes(R.dimen.rounded_grid_corners)
                     .shadowElevationRes(R.dimen.header_elevation)
+                    .clickHandler(AdapterItem.onViewClicked(c))
                     .content(main)
                     .build()
             ).build()
+    }
+
+
+    @OnEvent(ClickEvent::class)
+    fun onViewClicked(c: ComponentContext, @Prop info: InfoObject) {
+        Timber.d("onViewClicked: $info")
+
+        AdapterItem.dispatchAdapterItemClickEvent(
+            AdapterItem.getAdapterItemClickEventHandler(c), info)
     }
 }

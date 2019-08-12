@@ -2,6 +2,7 @@ package sample.settings.gensagames.samplejetpackmvvm.view.adapter
 
 import android.content.Context
 import com.facebook.litho.ComponentContext
+import com.facebook.litho.EventHandler
 import com.facebook.litho.LithoView
 import com.facebook.litho.annotations.Prop
 import com.facebook.litho.sections.Children
@@ -17,10 +18,12 @@ import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 
 @GroupSectionSpec
 object AdapterListSpec {
-    const val GRID_COLUMNS = 2
+    private const val GRID_COLUMNS = 2
 
     @JvmStatic
-    fun buildListItems(context: Context, items: List<InfoObject>): LithoView? {
+    fun buildListItems(
+        context: Context, items: List<InfoObject>,
+        callback : EventHandler<InfoObject>): LithoView? {
 
         val component = RecyclerCollectionComponent
             .create(ComponentContext(context))
@@ -34,6 +37,7 @@ object AdapterListSpec {
             .section(
                 AdapterList
                     .create(SectionContext(context))
+                    .callback(callback)
                     .items(items)
                     .build()
             )
@@ -43,7 +47,10 @@ object AdapterListSpec {
 
     @JvmStatic
     @OnCreateChildren
-    fun onCreateChildren(c: SectionContext, @Prop items: List<InfoObject>): Children {
+    fun onCreateChildren(
+        c: SectionContext, @Prop items: List<InfoObject>,
+        @Prop callback : EventHandler<InfoObject>): Children {
+
         val builder = Children.create()
 
         for (i in items) {
@@ -54,6 +61,7 @@ object AdapterListSpec {
                     .component(
                         AdapterItem
                             .create(c)
+                            .adapterItemClickEventHandler(callback)
                             .info(i)
                     )
             )

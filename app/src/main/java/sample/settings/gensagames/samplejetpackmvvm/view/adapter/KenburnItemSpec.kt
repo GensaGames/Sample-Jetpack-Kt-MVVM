@@ -15,7 +15,7 @@ import com.facebook.yoga.YogaPositionType
 import sample.settings.gensagames.samplejetpackmvvm.R
 
 @LayoutSpec
-object KenburnsItemSpec {
+object KenburnItemSpec {
 
 
     @OnCreateLayout

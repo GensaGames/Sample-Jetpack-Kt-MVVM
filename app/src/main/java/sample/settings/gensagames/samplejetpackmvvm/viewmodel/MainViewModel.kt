@@ -4,10 +4,15 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.facebook.litho.EventDispatcher
+import com.facebook.litho.EventHandler
+import com.facebook.litho.HasEventDispatcher
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.HeaderIntroObject
 import sample.settings.gensagames.samplejetpackmvvm.model.dto.InfoObject
 import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi
 import sample.settings.gensagames.samplejetpackmvvm.model.net.SampleApi2
+import sample.settings.gensagames.samplejetpackmvvm.utils.Event
+import sample.settings.gensagames.samplejetpackmvvm.view.adapter.AdapterItemClickEvent
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.BaseViewModel
 import sample.settings.gensagames.samplejetpackmvvm.viewmodel.base.OnLoadingInfo
 import timber.log.Timber
@@ -40,6 +45,21 @@ class MainViewModel : BaseViewModel(), OnLoadingInfo {
             }
             return field
         }
+
+    val clickEvents: EventHandler<InfoObject> = object : EventHandler<InfoObject>(
+        HasEventDispatcher {
+            EventDispatcher { _, eventState ->
+                val info = (eventState as AdapterItemClickEvent).info.also {
+                    Timber.d("Received Click Events: $it")
+                }
+                navigateAction.value = Event(info)
+                null
+            }
+
+        }, 0) {
+    }
+
+    val navigateAction : MutableLiveData<Event<InfoObject>> = MutableLiveData()
 
     private fun loadInfoData() {
         Timber.d( "updateResponse.")
